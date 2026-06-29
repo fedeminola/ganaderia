@@ -1,0 +1,76 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: >
+      sh -c "
+        # echo '--- Cleaning up old migration files... ---' &&
+        # find ./apps -path '*/migrations/*.py' -not -name '__init__.py' -delete &&
+        # find ./apps -path '*/migrations/*.pyc'  -delete &&
+        echo '--- Generating new database migrations... ---' &&
+        python manage.py makemigrations accounts farms locations animals rfid movements lots health reproduction weights finance dashboard audit &&
+        echo '--- Applying database migrations... ---' &&
+        python manage.py migrate &&
+        echo '--- Starting server... ---' &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings
+      - DATABASE_URL=postgres://ganadera_user:password@db:5432/ganadera_db
+      - REDIS_URL=redis://redis:6379/0
+    healthcheck:
+      # Check if the Django server is responsive
+      test: ["CMD", "curl", "-f", "http://localhost:8000/admin/login/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s # Give it time to run migrations and start
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        # Waits for the backend to be healthy before starting
+        condition: service_healthy
+
+  db:
+    image: postgis/postgis:13-3.1
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=ganadera_db
+      - POSTGRES_USER=ganadera_user
+      - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ganadera_user -d ganadera_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:6.2-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
