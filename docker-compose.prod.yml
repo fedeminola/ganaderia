@@ -44,6 +44,8 @@ services:
     build: ./nginx
     ports:
       - "127.0.0.1:8010:80"
+    volumes:
+      - static_volume:/app/staticfiles
     depends_on:
       - backend
       - frontend
