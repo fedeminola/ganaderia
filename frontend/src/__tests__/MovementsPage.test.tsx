@@ -39,7 +39,7 @@ const renderComponent = () => {
 
 describe('Movements Page', () => {
   beforeEach(() => {
-    mockedAxios.get.mockReset();.
+    mockedAxios.get.mockReset();
   });
 
   test('fetches and displays a list of movements', async () => {
