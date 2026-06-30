@@ -5,8 +5,6 @@ import { AuthProvider } from './context/AuthContext';
 import { FarmProvider } from './context/FarmContext';
 import { useAuth } from './hooks/useAuth';
 import { useFarm } from './hooks/useFarm';
-import { useAnimalsService, Animal } from '../features/animals/services/animalService';
-import { useEventsService } from '../features/animals/services/eventService';
 import { RfidOperations } from './pages/RfidOperations';
 import { LoginPage } from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -18,7 +16,6 @@ import Movements from './pages/Movements';
 import Lots from './pages/Lots';
 import Events from './pages/Events';
 import { Button } from './components/ui/Button';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/Card';
 import { Menu, X, LogOut, LayoutDashboard, Database, MapPin, Repeat, Tags, Wifi, History } from 'lucide-react';
 
 const queryClient = new QueryClient();
@@ -180,7 +177,7 @@ const FarmSelector = () => {
     );
 };
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth();
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

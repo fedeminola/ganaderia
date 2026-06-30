@@ -16,6 +16,8 @@ export interface Animal {
   current_lot: string | null;
   mother: string | null;
   notes: string | null;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export const useAnimalsService = () => {
