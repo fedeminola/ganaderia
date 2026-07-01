@@ -26,5 +26,9 @@ class AnimalEvent(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='audit_events')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Evento de auditoria'
+        verbose_name_plural = 'Eventos de auditoria'
+
     def __str__(self):
         return f'{self.event_type} for {self.animal} at {self.timestamp}'

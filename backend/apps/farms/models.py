@@ -23,6 +23,8 @@ class Farm(models.Model):
     )
 
     class Meta:
+        verbose_name = 'Establecimiento'
+        verbose_name_plural = 'Establecimientos'
         ordering = ['name']
 
     def __str__(self):
@@ -40,6 +42,8 @@ class Membership(models.Model):
     role = models.CharField(max_length=10, choices=Role.choices, default=Role.OPERATOR)
 
     class Meta:
+        verbose_name = 'Membresia'
+        verbose_name_plural = 'Membresias'
         unique_together = ('user', 'farm')
         ordering = ['farm__name', 'user__username']
 

@@ -38,19 +38,19 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_spectacular',
     'django_filters',
-    'apps.accounts',
-    'apps.farms',
-    'apps.locations',
-    'apps.animals',
-    'apps.rfid',
-    'apps.movements',
-    'apps.lots',
-    'apps.health',
-    'apps.reproduction',
-    'apps.weights',
-    'apps.finance',
-    'apps.dashboard',
-    'apps.audit',
+    'apps.accounts.apps.AccountsConfig',
+    'apps.farms.apps.FarmsConfig',
+    'apps.locations.apps.LocationsConfig',
+    'apps.animals.apps.AnimalsConfig',
+    'apps.rfid.apps.RfidConfig',
+    'apps.movements.apps.MovementsConfig',
+    'apps.lots.apps.LotsConfig',
+    'apps.health.apps.HealthConfig',
+    'apps.reproduction.apps.ReproductionConfig',
+    'apps.weights.apps.WeightsConfig',
+    'apps.finance.apps.FinanceConfig',
+    'apps.dashboard.apps.DashboardConfig',
+    'apps.audit.apps.AuditConfig',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-LANGUAGE_CODE = 'es-ar'
+LANGUAGE_CODE = os.environ.get('LANGUAGE_CODE', 'es-ar')
 TIME_ZONE = os.environ.get('TIME_ZONE', 'America/Argentina/Buenos_Aires')
 USE_I18N = True
 USE_TZ = True

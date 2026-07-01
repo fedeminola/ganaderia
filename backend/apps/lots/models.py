@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 from ..farms.models import Farm
 
@@ -13,8 +12,8 @@ class Lot(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = _("Lot")
-        verbose_name_plural = _("Lots")
+        verbose_name = "Lote"
+        verbose_name_plural = "Lotes"
         unique_together = ("farm", "name")
 
     def __str__(self):
@@ -27,6 +26,6 @@ class LotMembership(models.Model):
     date_joined = models.DateField(auto_now_add=True)
 
     class Meta:
-        verbose_name = _("Lot Membership")
-        verbose_name_plural = _("Lot Memberships")
+        verbose_name = "Membresia de lote"
+        verbose_name_plural = "Membresias de lote"
         unique_together = ("lot", "animal")

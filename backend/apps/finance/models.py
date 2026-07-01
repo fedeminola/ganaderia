@@ -24,8 +24,8 @@ class Transaction(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = _("Transaction")
-        verbose_name_plural = _("Transactions")
+        verbose_name = "Transaccion"
+        verbose_name_plural = "Transacciones"
         ordering = ["-date"]
 
     def __str__(self):

@@ -4,3 +4,4 @@ from django.apps import AppConfig
 class ReproductionConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'apps.reproduction'
+    verbose_name = 'Reproduccion'

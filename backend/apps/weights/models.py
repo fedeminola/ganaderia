@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 class WeightMeasurement(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -15,8 +14,8 @@ class WeightMeasurement(models.Model):
 
     class Meta:
         ordering = ["-measurement_date"]
-        verbose_name = _("Weight Measurement")
-        verbose_name_plural = _("Weight Measurements")
+        verbose_name = "Medicion de peso"
+        verbose_name_plural = "Mediciones de peso"
 
     def __str__(self):
         return f"{self.animal} - {self.weight} kg"

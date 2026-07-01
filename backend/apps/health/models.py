@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 from ..farms.models import Farm
 
@@ -10,6 +9,10 @@ class Vaccine(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Vacuna"
+        verbose_name_plural = "Vacunas"
+
     def __str__(self):
         return self.name
 
@@ -18,6 +21,10 @@ class Treatment(models.Model):
     farm = models.ForeignKey(Farm, on_delete=models.CASCADE, related_name="treatments")
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Tratamiento"
+        verbose_name_plural = "Tratamientos"
 
     def __str__(self):
         return self.name
@@ -30,6 +37,10 @@ class HealthProtocol(models.Model):
     vaccines = models.ManyToManyField(Vaccine, blank=True)
     treatments = models.ManyToManyField(Treatment, blank=True)
 
+    class Meta:
+        verbose_name = "Protocolo sanitario"
+        verbose_name_plural = "Protocolos sanitarios"
+
     def __str__(self):
         return self.name
 
@@ -40,6 +51,10 @@ class ScheduledHealthEvent(models.Model):
     due_date = models.DateField()
     completed = models.BooleanField(default=False)
     completed_date = models.DateField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Evento sanitario programado"
+        verbose_name_plural = "Eventos sanitarios programados"
 
     def __str__(self):
         return f"{self.protocol.name} for {self.animal} on {self.due_date}"

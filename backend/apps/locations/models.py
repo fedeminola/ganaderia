@@ -27,8 +27,8 @@ class Location(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = _("Location")
-        verbose_name_plural = _("Locations")
+        verbose_name = "Ubicacion"
+        verbose_name_plural = "Ubicaciones"
         unique_together = ("farm", "name")
 
     def __str__(self):

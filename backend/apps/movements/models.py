@@ -1,7 +1,6 @@
 import uuid
 from django.db import models
 from django.conf import settings
-from django.utils.translation import gettext_lazy as _
 
 from ..farms.models import Farm
 from ..locations.models import Location
@@ -21,8 +20,8 @@ class Movement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = _("Movement")
-        verbose_name_plural = _("Movements")
+        verbose_name = "Movimiento"
+        verbose_name_plural = "Movimientos"
         ordering = ["-timestamp"]
 
     def __str__(self):
@@ -34,6 +33,6 @@ class MovementAnimal(models.Model):
     animal = models.ForeignKey("animals.Animal", on_delete=models.CASCADE, related_name="movements_history")
 
     class Meta:
-        verbose_name = _("Movement Animal")
-        verbose_name_plural = _("Movement Animals")
+        verbose_name = "Animal en movimiento"
+        verbose_name_plural = "Animales en movimiento"
         unique_together = ("movement", "animal")

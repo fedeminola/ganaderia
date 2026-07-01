@@ -14,7 +14,8 @@ class Species(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name_plural = _("Species")
+        verbose_name = "Especie"
+        verbose_name_plural = "Especies"
         unique_together = ("farm", "name")
         ordering = ["name"]
 
@@ -28,7 +29,8 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name_plural = _("Categories")
+        verbose_name = "Categoria"
+        verbose_name_plural = "Categorias"
         unique_together = ("farm", "species", "name")
         ordering = ["name"]
 
@@ -73,8 +75,8 @@ class Animal(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = _("Animal")
-        verbose_name_plural = _("Animals")
+        verbose_name = "Animal"
+        verbose_name_plural = "Animales"
         unique_together = (("farm", "internal_number"), ("farm", "rfid"))
 
     def __str__(self):
@@ -142,8 +144,8 @@ class AnimalEvent(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = _("Animal Event")
-        verbose_name_plural = _("Animal Events")
+        verbose_name = "Evento de animal"
+        verbose_name_plural = "Eventos de animales"
         ordering = ["-timestamp"]
 
     def __str__(self):
@@ -162,8 +164,8 @@ class MissingAlert(models.Model):
 
     class Meta:
         ordering = ["-detected_at"]
-        verbose_name = _("Missing Alert")
-        verbose_name_plural = _("Missing Alerts")
+        verbose_name = "Alerta de animal faltante"
+        verbose_name_plural = "Alertas de animales faltantes"
 
     def __str__(self):
         return f"Missing: {self.animal.rfid} at {self.location}"
